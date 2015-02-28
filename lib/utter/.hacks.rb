@@ -58,3 +58,61 @@ end
 a.map('/') { run MyApp }
 
 END{Rack::Handler.get("webrick").run(a,Port:$port){|s|$r=s}}
+
+
+
+=begin
+  q = nil  
+  %w[params session].map do |m|
+    define_method(m)do 
+      q.send m
+    end
+  end
+
+  define_method(:before){|&b|$Utter.use Rack::Config,&b};
+  before{|e|q=Rack::Request.new e; q.params.dup.map{ |k,v| params[k.to_sym]=v}} 
+=end 
+
+=begin
+    %w{resource}.map do |method|
+      define_method(method) do |path, &block|
+	$Utter.map(path) do
+	  $Utter.instance_exec(&block)
+	end
+      end
+    end
+
+    def self.nest(*blocks, &block)
+      require 'rack'
+      blocks.reject!(&:nil?)
+      if blocks.any?
+	instance_eval(&block) if block_given?
+	blocks.each do |b| 
+	  #instance_eval(&b) 
+	  app = Rack::Builder.app do
+	    run ->(e) { [200, {"Content-Type" => "application/json"}, [$Utter.instance_exec(&b)]] }
+	  end
+	end
+	#reset_validations!
+      else
+	run ->(e) { [200, {"Content-Type" => "application/json"}, [$Utter.instance_exec(&block)]] }
+	#$Utter.instance_eval(&block)
+      end
+    end
+=end
+
+
+
+=begin
+  %w{r}.map do |method|
+    define_method(method) do |path, &block|
+
+      $Utter.instance_exec(&block)
+
+      #$Utter.map('/inner') { run InnerApp.new }
+      #$Utter.map(path) do
+      #	$Utter.instance_exec(&block)
+      #end
+    end
+  end
+=end

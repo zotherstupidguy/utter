@@ -1,12 +1,12 @@
 require './api.rb'
-map '/x' do 
-  use Rack::CommonLogger  
-  use Rack::Session::Cookie; # https://gist.github.com/noahhendrix/1509698 Authenticating with Grape
-  use Rack::Lock; # simultanious requests
 
-  run Utter::API 
+map '/x' do 
+  map '/y' do 
+    run Utter::API 
+  end
 end
 
+run Utter::API 
 #app = Rack::URLMap.new "/one" => MyAPI 
 #run app
 
