@@ -1,4 +1,5 @@
-require 'utter/api'
+require_relative './utter/api'
+require_relative './utter/ds'
 
 module Utter
   def self.gem_version

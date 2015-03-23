@@ -1,7 +1,6 @@
 # No code is faster than no code.
 require 'rack' 
 require 'json' 
-require './ds'
 
 module Utter
 
