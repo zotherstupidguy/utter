@@ -1,5 +1,4 @@
-require './../lib/utter'
-require './helper'
+require './../helper'
 
 describe Utter::Model do
   it "contains a instance #save method" do 

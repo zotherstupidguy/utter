@@ -55,7 +55,7 @@ module Utter
     $Utter.use Rack::Session::Cookie; # https://gist.github.com/noahhendrix/1509698 Authenticating with Grape
     $Utter.use Rack::Lock; # simultanious requests
 
-    
+
     def self.prefix v 
       if !v.nil?
 	@prefix = v.to_s + '/'

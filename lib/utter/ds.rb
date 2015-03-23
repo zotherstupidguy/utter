@@ -10,11 +10,11 @@ require "redis"
 
 module Utter
 
-  class Model
+  class Model < Utter::Klass
     attr_accessor :id
 
     def self.inherited utter_model
-      p "#Utter::Model: #{utter_model.to_s} initialized"
+      log.info "#Utter::Model: #{utter_model.to_s} initialized"
     end
 
     def self.store
@@ -23,12 +23,12 @@ module Utter
 
     def save 
       if !self.class.exists? @id
-	p "saving #{@id}"
+	Utter::Klass.log.info "saving #{@id}"
 	model = (self.class.to_s.downcase + 's') 
 	self.class.store.lpush model, @id # now i have a list of all users registered
 	self.class.store.set "#{model + ":" + @id}", Marshal::dump(self)
       else 
-	p "#{id} already exists"
+	Utter::Klass.log.info "#{id} already exists"
       end
     end
 
@@ -37,7 +37,7 @@ module Utter
 	model = (self.to_s.downcase + 's') 
 	Marshal::load(store.get "#{model + ":" + id}") 
       else
-	p "#{id} not found"
+	log.info "#{id} not found"
       end
     end
 

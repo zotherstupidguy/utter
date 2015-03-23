@@ -1,6 +1,7 @@
-require_relative './utter/api'
+require_relative './utter/logger'
 require_relative './utter/ds'
-
+require_relative './utter/api'
+=begin
 module Utter
   def self.gem_version
     Gem::Version.new VERSION::STRING
@@ -13,3 +14,4 @@ module Utter
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join
   end
 end
+=end
