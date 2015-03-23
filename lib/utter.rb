@@ -1,4 +1,5 @@
 require 'utter/api' 
+require 'utter/api' 
 
 module Utter
 
