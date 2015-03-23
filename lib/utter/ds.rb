@@ -7,7 +7,6 @@
 # set users:someusername "marsheledobject for presistance" #now i have a hash of every registered user 
 
 require "redis"
-require "json"
 
 module Utter
 
@@ -61,4 +60,3 @@ module Utter
   end
 
 end
-
