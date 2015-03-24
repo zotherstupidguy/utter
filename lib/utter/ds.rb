@@ -11,6 +11,7 @@ require "redis"
 module Utter
 
   class Model < Utter::Klass
+
     attr_accessor :id
 
     def self.inherited utter_model
@@ -57,6 +58,8 @@ module Utter
 	return false
       end
     end
+
+    alias :save! :save
   end
 
 end
