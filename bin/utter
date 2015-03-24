@@ -125,16 +125,19 @@ when "new"
     end
   end
 
-  #TODO found a better solution there https://github.com/zotherstupidguy/plural
-  #TODO so here the user must supply the singular and plural words 
-  # utter :
-
-
-  p "generating a new utter project" 
   #TODO make a Rakefile in the project folder to setup all the needed functionality and then use it from the bin script
   @project = ARGV[0] 
+  @ver     = ARGV[1] 
+  p "generating a new utter project" 
+  p "#{@project}::#{@ver}" 
 
-when "server"
+when "generate", "g"
+  @model = ARGV[0] 
+  @auth = ARGV[1]
+  if "auth" == ARGV[1]
+    p "generating authentication for #{@model}" 
+  end
+when "server", "s"
   #TODO add gem server to gemspec
   # http://blog.gemnasium.com/post/62702069261/serving-ruby-gems-the-paranoid-way
   require './gem_server'
