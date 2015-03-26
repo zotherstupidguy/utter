@@ -27,5 +27,4 @@ Long-term Roadmap
 # Refrences
 We would like to thank APIGee for their awesome webcasts that made such a project possible.
 
-[![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](http://www.youtube.com/watch?v=T-D1KVIuvjA)
-[![Alt text for your video](http://img.youtube.com/vi/QpAhXa12xvU/0.jpg)](https://www.youtube.com/watch?v=QpAhXa12xvU)
+[![RESTful API Design - Second Edition](http://img.youtube.com/vi/QpAhXa12xvU/0.jpg)](https://www.youtube.com/watch?v=QpAhXa12xvU)
