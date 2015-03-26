@@ -1,3 +1,4 @@
+#TODO move to another gem 'utter/logger'
 require 'logger'
 require 'stringio'
 
