@@ -1,0 +1,21 @@
+
+task :api_folder do
+  puts "creating a api:folder with the #{ENV["model"]} name"
+end
+
+task :endpoint do
+  puts "creating endpoint.rb" + $DONE
+end
+
+task :model do
+  puts "creating model.rb"
+end
+
+task :new => [:api_folder, :endpoint, :model] do
+  puts "creating a #{ENV["ver"]} of #{ENV["model"]}"
+  puts "Utter is " + $READY
+end
+
+task :server do
+
+end

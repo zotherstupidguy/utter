@@ -5,6 +5,78 @@ require 'optparse'
 require 'rack'
 require 'utter'
 
+module Utter
+  module Utils
+    # Credits for the plural module goes to stewart https://github.com/stewart/plural
+    # Brought here to keep gem dependency overload to the absolute minimum. 
+    module Plural
+      def self.rules
+	@rules ||= [
+	  [/(z)ombies$/i, "\\1ombies"],
+	  [/(z)ombie$/i, "\\1ombies"],
+	  [/k(?i)ine$/, "kine"],
+	  [/K(?i)ine$/, "Kine"],
+	  [/c(?i)ow$/, "kine"],
+	  [/C(?i)ow$/, "Kine"],
+	  [/(m)oves$/i, "\\1oves"],
+	  [/(m)ove$/i, "\\1oves"],
+	  [/(s)exes$/i, "\\1exes"],
+	  [/(s)ex$/i, "\\1exes"],
+	  [/(c)hildren$/i, "\\1hildren"],
+	  [/(c)hild$/i, "\\1hildren"],
+	  [/(m)en$/i, "\\1en"],
+	  [/(m)an$/i, "\\1en"],
+	  [/(p)eople$/i, "\\1eople"],
+	  [/(p)erson$/i, "\\1eople"],
+	  [/(quiz)$/i, "\\1zes"],
+	  [/^(oxen)$/i, "\\1"],
+	  [/^(ox)$/i, "\\1en"],
+	  [/^(m|l)ice$/i, "\\1ice"],
+	  [/^(m|l)ouse$/i, "\\1ice"],
+	  [/(matr|vert|ind)(?:ix|ex)$/i, "\\1ices"],
+	  [/(x|ch|ss|sh)$/i, "\\1es"],
+	  [/([^aeiouy]|qu)y$/i, "\\1ies"],
+	  [/(hive)$/i, "\\1s"],
+	  [/(?:([^f])fe|([lr])f)$/i, "\\1\\2ves"],
+	  [/sis$/i, "ses"],
+	  [/([ti])a$/i, "\\1a"],
+	  [/([ti])um$/i, "\\1a"],
+	  [/(buffal|tomat)o$/i, "\\1oes"],
+	  [/(bu)s$/i, "\\1ses"],
+	  [/(alias|status)$/i, "\\1es"],
+	  [/(octop|vir)i$/i, "\\1i"],
+	  [/(octop|vir)us$/i, "\\1i"],
+	  [/^(ax|test)is$/i, "\\1es"],
+	  [/s$/i, "s"],
+	  [/$/, "s"]
+	]
+      end
+
+      def self.uncountables
+	@uncountables ||= %w(equipment information rice money
+			 species series fish sheep jeans police)
+      end
+
+    end
+    class Str < String
+      def initialize result 
+	@result = result
+      end
+      def plural
+	@result = self.dup
+
+	if self.empty? || Plural.uncountables.any? { |i| @result =~ /\b#{i}\Z/i }
+	  @result
+	else
+	  Plural.rules.each { |(rule, replacement)| break if @result.gsub!(rule, replacement) }
+	  @result
+	end
+      end
+    end
+  end
+end
+
+
 subtext = <<HELP
 
  88        88                                           
@@ -61,76 +133,12 @@ command = ARGV.shift
 case command 
 
 when "new"
-  # Credits for the plural module goes to stewart https://github.com/stewart/plural
-  # Brought here to keep gem dependency overload to the absolute minimum. 
-  module Plural
-    def self.rules
-      @rules ||= [
-	[/(z)ombies$/i, "\\1ombies"],
-	[/(z)ombie$/i, "\\1ombies"],
-	[/k(?i)ine$/, "kine"],
-	[/K(?i)ine$/, "Kine"],
-	[/c(?i)ow$/, "kine"],
-	[/C(?i)ow$/, "Kine"],
-	[/(m)oves$/i, "\\1oves"],
-	[/(m)ove$/i, "\\1oves"],
-	[/(s)exes$/i, "\\1exes"],
-	[/(s)ex$/i, "\\1exes"],
-	[/(c)hildren$/i, "\\1hildren"],
-	[/(c)hild$/i, "\\1hildren"],
-	[/(m)en$/i, "\\1en"],
-	[/(m)an$/i, "\\1en"],
-	[/(p)eople$/i, "\\1eople"],
-	[/(p)erson$/i, "\\1eople"],
-	[/(quiz)$/i, "\\1zes"],
-	[/^(oxen)$/i, "\\1"],
-	[/^(ox)$/i, "\\1en"],
-	[/^(m|l)ice$/i, "\\1ice"],
-	[/^(m|l)ouse$/i, "\\1ice"],
-	[/(matr|vert|ind)(?:ix|ex)$/i, "\\1ices"],
-	[/(x|ch|ss|sh)$/i, "\\1es"],
-	[/([^aeiouy]|qu)y$/i, "\\1ies"],
-	[/(hive)$/i, "\\1s"],
-	[/(?:([^f])fe|([lr])f)$/i, "\\1\\2ves"],
-	[/sis$/i, "ses"],
-	[/([ti])a$/i, "\\1a"],
-	[/([ti])um$/i, "\\1a"],
-	[/(buffal|tomat)o$/i, "\\1oes"],
-	[/(bu)s$/i, "\\1ses"],
-	[/(alias|status)$/i, "\\1es"],
-	[/(octop|vir)i$/i, "\\1i"],
-	[/(octop|vir)us$/i, "\\1i"],
-	[/^(ax|test)is$/i, "\\1es"],
-	[/s$/i, "s"],
-	[/$/, "s"]
-      ]
-    end
-
-    def self.uncountables
-      @uncountables ||= %w(equipment information rice money
-			 species series fish sheep jeans police)
-    end
-
-  end
-  class Project < String
-    def plural
-      result = self.dup
-
-      if self.empty? || Plural.uncountables.any? { |i| result =~ /\b#{i}\Z/i }
-	result
-      else
-	Plural.rules.each { |(rule, replacement)| break if result.gsub!(rule, replacement) }
-	result
-      end
-    end
-  end
-
   #TODO make a Rakefile in the project folder to setup all the needed functionality and then use it from the bin script
-  @project = ARGV[0] 
+  @model = Utter::Utils::Str.new ARGV[0] 
   @ver     = ARGV[1] 
   p "generating a new utter project" 
-  p "#{@project}::#{@ver}" 
-
+  p "#{@model.plural}::#{@ver}" 
+      
 when "generate", "g"
   @model = ARGV[0] 
   @auth = ARGV[1]
