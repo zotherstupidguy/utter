@@ -1,5 +1,6 @@
 ![alt tag](utter.png)
-
+# Installation
+  gem install utter
 #Usage
 * > utter help                 # lists all commands
 * > utter new users v1         # creates ver1 api and model for users
@@ -9,7 +10,7 @@
 
 
 
-# Utter' Tenets for Good Web API Design 
+# Utter's Tenets for Good Web API Design 
 - Use plural instead of singular (/dogs instead of /dog)
 - Enforce the use Versioning as v1, v2, v3, NOT v1.0.1 or v1.1 
 - Package and deploy your versioned API to your Production Server 
@@ -22,3 +23,9 @@
 
 Long-term Roadmap
 - Automatically extracts API model from your ruby code and generates backbone.js code for your UI (interface driven development)
+
+# Refrences
+We would like to thank APIGee for their awesome webcasts that made such a project possible.
+
+[![Alt text for your video](http://img.youtube.com/vi/T-D1KVIuvjA/0.jpg)](http://www.youtube.com/watch?v=T-D1KVIuvjA)
+[![Alt text for your video](http://img.youtube.com/vi/QpAhXa12xvU/0.jpg)](https://www.youtube.com/watch?v=QpAhXa12xvU)
