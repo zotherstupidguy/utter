@@ -1,10 +1,11 @@
 ![alt tag](utter.png)
 
 #Usage
-> utter new users v1
-> utter new users v2
-> utter new services v1
-> utter new services v2
+* > utter help                 # lists all commands
+* > utter new users v1         # creates ver1 api and model for users
+* > utter new users v2
+* > utter new services v1
+* > utter new services v2
 
 
 
