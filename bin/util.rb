@@ -1,18 +1,14 @@
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
 class String
-  # colorization
   def colorize(color_code)
     "\e[#{color_code}m#{self}\e[0m"
   end
-
   def red
     colorize(31)
   end
-
   def green
     colorize(32)
   end
-
   def yellow
     colorize(33)
   end
@@ -26,5 +22,7 @@ class String
     "\e[4m#{self}"
   end
 end
-$DONE  = "Done".green.dim.underline
+
+$DONE  = "Done".green.dim
+$WARN  = "Warning".red.bold
 $READY = "Ready".green

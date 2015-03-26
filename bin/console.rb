@@ -3,7 +3,6 @@
 # problem you can solve: find it.
 #   “How To Solve It,” G. Pólya, 1945
 
-
 require './util'
 require 'rake'
 
@@ -17,3 +16,4 @@ app.load_rakefile
 app['new'].invoke model = "Users", ver="v1"
 
 puts "hello"
+puts $WARN
