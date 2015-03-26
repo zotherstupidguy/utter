@@ -1,5 +1,6 @@
 ![alt tag](utter.png)
 
+#Usage
 > utter new users v1
 > utter new users v2
 > utter new services v1
