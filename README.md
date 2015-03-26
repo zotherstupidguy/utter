@@ -25,6 +25,6 @@ Long-term Roadmap
 - Automatically extracts API model from your ruby code and generates backbone.js code for your UI (interface driven development)
 
 # Refrences
-We would like to thank APIGee for their awesome webcasts that made such a project possible.
+We would like to thank APIGee for their awesome webcasts that made building Utter a joy.
 
 [![RESTful API Design - Second Edition](http://img.youtube.com/vi/QpAhXa12xvU/0.jpg)](https://www.youtube.com/watch?v=QpAhXa12xvU)
