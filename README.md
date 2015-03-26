@@ -9,16 +9,16 @@
 
 
 
-#Tenets of Pragmatic API Design
+# Utter' Tenets for Good Web API Design 
 - Use plural instead of singular (/dogs instead of /dog)
-- Enforce the use Versioning as v1, v2, v3, NOT v1.0.1 blah blah
+- Enforce the use Versioning as v1, v2, v3, NOT v1.0.1 or v1.1 
 - Package and deploy your versioned API to your Production Server 
-- Ability to nodifiy developers with the depreciation of the earlier versions
+- Ability to nodifiy developers with the depreciation of the earlier versions, simply by adding Depreciated keyword in your API ruby file.
 - Use HTTP Codes as much as possible
-- partial response /users?fields=name,age,loction to cut down on band width
-- pagination using limit and offset /dogs?limit=25&offset=50 
-- ensuring response format  /dogs.json  /dogs/1234.json /dogs.xml /dogs/1234.xml  
+- Partial response /users?fields=name,age,loction to cut down on band width
+- Pagination using limit and offset /dogs?limit=25&offset=50 
+- Ensuring response format  /dogs.json  /dogs/1234.json /dogs.xml /dogs/1234.xml  
 - defaults: json, limit&offset,  
 
 Long-term Roadmap
-- generates backbone code for your interface (interface driven development)
+- Automatically extracts API model from your ruby code and generates backbone.js code for your UI (interface driven development)
