@@ -1,7 +1,6 @@
-# If there is a problem you can’t
-# solve, then there is an easier
-# problem you can solve: find it.
-#   “How To Solve It,” G. Pólya, 1945
+# If there is a problem you can’t solve, 
+# then there is an easier problem you can solve: find it. 
+# 					~ “How To Solve It,” G. Pólya, 1945
 
 require './util'
 require 'rake'
