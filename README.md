@@ -25,7 +25,7 @@ Long-term Roadmap
 - Automatically extracts API model from your ruby code and generates backbone.js code for your UI (interface driven development)
 
 # Join the Development of Utter 
-  it is a simple, easy, and in-the-shadows opensource project. With a very lonely "terminally ill" maintainer who would do his best to share his knowledge with you. 
+  It is a simple, easy-to-follow, and in-the-shadows opensource project with a very lonely "terminally ill" maintainer who would do his best to share his knowledge with you. 
 
   And remmber to "try not to become a man of success, but rather try to become a man of value" ~ Albert Einstein
 
