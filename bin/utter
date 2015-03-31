@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
+
 #
 # "The time it takes to make a decision increases as the number of alternatives increases" 
-# ~ Hick's Law (Universal Principles of Design 
+# ~ Hick's Law (Universal Principles of Design)
 #
+
 require 'find'
 require 'fileutils'
 require 'optparse'
@@ -69,6 +71,25 @@ global.order!
 Dir.glob("commands/*.rb").each do |command|
   require "./#{command}"
 end
+
+
+# If there is a problem you can’t solve, 
+# then there is an easier problem you can solve: find it. 
+# 					~ “How To Solve It,” G. Pólya, 1945
+
+require 'rake'
+
+app = Rake.application
+app.init
+# do this as many times as needed
+#app.add_import 'konsole'
+# this loads the Rakefile and other imports
+app.load_rakefile
+
+app['new'].invoke model = "Users", ver="v1"
+
+puts "hello"
+puts $WARN
 
 case @command 
 

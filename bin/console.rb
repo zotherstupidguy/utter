@@ -2,7 +2,6 @@
 # then there is an easier problem you can solve: find it. 
 # 					~ “How To Solve It,” G. Pólya, 1945
 
-require './util'
 require 'rake'
 
 app = Rake.application
