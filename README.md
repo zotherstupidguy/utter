@@ -29,6 +29,8 @@ Long-term Roadmap
 
   And remmber to "try not to become a man of success, but rather try to become a man of value" ~ Albert Einstein
 
+“I am not an Athenian or a Greek, but a citizen of the world." ― Socrates
+"“To be is to do” - Socrates
 # Refrences
 We would like to thank APIGee for their awesome webcasts that made building Utter a joy.
 

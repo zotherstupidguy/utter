@@ -1,5 +1,5 @@
 require 'minitest/spec'
 require 'minitest/autorun'
 
-require './../lib/utter'
+require_relative  './../lib/utter'
 
