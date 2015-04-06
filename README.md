@@ -9,7 +9,6 @@
 * > utter new services v2
 
 
-
 # Utter's Tenets for Good Web API Design 
 - Use plural instead of singular (/dogs instead of /dog)
 - Enforce the use Versioning as v1, v2, v3, NOT v1.0.1 or v1.1 
@@ -21,7 +20,7 @@
 - Ensuring response format  /dogs.json  /dogs/1234.json /dogs.xml /dogs/1234.xml  
 - defaults: json, limit&offset,  
 
-Long-term Roadmap
+# Interface Driven-Development 
 - Automatically extracts API model from your ruby code and generates backbone.js code for your UI (interface driven development)
 
 # Join the Development of Utter 
