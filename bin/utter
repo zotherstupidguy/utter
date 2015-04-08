@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
 
-#
-# "The time it takes to make a decision increases as the number of alternatives increases" 
-# ~ Hick's Law (Universal Principles of Design)
-#
-
+require 'rake'
 require 'find'
 require 'fileutils'
 require 'optparse'
@@ -12,58 +8,13 @@ require 'rack'
 require 'utter'
 
 Dir.glob("utils/*.rb").each do |util|
-  require "./#{util}"
+  require_relative "./#{util}"
 end
 
-subtext = <<HELP
-
- 88        88                                           
- 88        88    ,d       ,d                            
- 88        88    88       88                            
- 88        88  MM88MMM  MM88MMM  ,adPPYba,  8b,dPPYba,  
- 88        88    88       88    a8P_____88  88P'   "Y8  
- 88        88    88       88    8PP"""""""  88          
- Y8a.    .a8P    88,      88,   "8b,   ,aa  88          
-  `"Y8888Y"'     "Y888    "Y888  `"Ybbd8"'  88          
-
-
-  usage: utter [command] [options]
-
-  -----------------------------------------------------------------------------------------------------------------------
-    new          	:    creates a project folder 
-    > utter new my_project
-  -----------------------------------------------------------------------------------------------------------------------
-    new model    	:    creates a project model 
-    > utter new model User 
-  -----------------------------------------------------------------------------------------------------------------------
-    new endpoint 	:    creates a project endpoint 
-    > utter new endpoint UserAPI
-  -----------------------------------------------------------------------------------------------------------------------
-    package      	:    packages the project as a gem 
-  -----------------------------------------------------------------------------------------------------------------------
-    set          	:    set your own gem server URL 
-  -----------------------------------------------------------------------------------------------------------------------
-    publish      	:    publish the project gem to your own gem server 
-  -----------------------------------------------------------------------------------------------------------------------
-    start        	:    launches the utter server 
-  -----------------------------------------------------------------------------------------------------------------------
-    status       	:    status of the utter server 
-  -----------------------------------------------------------------------------------------------------------------------
-    stop         	:    status of the utter server 
-  -----------------------------------------------------------------------------------------------------------------------
-    {model} simple_auth :    creates a {model} api with simple signup and login 
-  -----------------------------------------------------------------------------------------------------------------------
-    db           :    
-  -----------------------------------------------------------------------------------------------------------------------
-    server       :    launches the utter server 
-  -----------------------------------------------------------------------------------------------------------------------
-
-HELP
 
 global = OptionParser.new do |opts|
   opts.banner = ""
-  opts.separator ""
-  opts.separator subtext
+  opts.separator UTTER_HELP 
 end
 global.order!
 @command = ARGV.shift
@@ -72,27 +23,15 @@ Dir.glob("commands/*.rb").each do |command|
   require "./#{command}"
 end
 
-
-# If there is a problem you can’t solve, 
-# then there is an easier problem you can solve: find it. 
-# 					~ “How To Solve It,” G. Pólya, 1945
-
-require 'rake'
-
+# Loads the Rakefile
 app = Rake.application
 app.init
-# do this as many times as needed
-#app.add_import 'konsole'
-# this loads the Rakefile and other imports
 app.load_rakefile
 
-app['new'].invoke model = "Users", ver="v1"
-
-puts "hello"
-puts $WARN
-
+# Captures the ARGV command
 case @command 
-
+when "new", "n" 
+  app['new'].invoke model = "Users", ver="v1"
 when "generate", "g"
   @model = ARGV[0] 
   @auth = ARGV[1]
@@ -102,8 +41,12 @@ when "generate", "g"
 when "server", "s"
   #TODO add gem server to gemspec
   # http://blog.gemnasium.com/post/62702069261/serving-ruby-gems-the-paranoid-way
-  require './gem_server'
 
+  #> utter setup server
+  # http://ruby-doc.org/stdlib-2.0.0/libdoc/rubygems/rdoc/Gem/Server.html
+  require 'rubygems/server'
+  gem_server = Gem::Server.new Gem.dir, 8089, false
+  gem_server.run
 when "publish"
   @gem = ARGV[0] 
 

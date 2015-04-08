@@ -1,0 +1,4 @@
+"The time it takes to make a decision increases as the number of alternatives increases"  ~ Hick's Law (Universal Principles of Design)
+
+"If there is a problem you can’t solve, then there is an easier problem you can solve: find it." ~ “How To Solve It,” G. Pólya, 1945
+
