@@ -1,6 +1,29 @@
-
-task :api_folder do
+task :project_folder do
   puts "creating a api:folder with the #{ENV["model"]} name"
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+desc "Creates a new Utter model"
+task :model do
+  puts "creating model.rb"
 end
 
 desc "Creates a new Utter endpoint"
@@ -8,24 +31,14 @@ task :endpoint do
   puts "creating endpoint.rb" + $DONE
 end
 
-desc "Creates a new Utter model"
-task :model do
-  puts "creating model.rb"
-end
 
-desc "Creates a new"
-task :new => [:api_folder, :endpoint, :model] do
+desc "Creates a new Utter Project"
+task :new => [:project_folder, :endpoint, :model] do
   puts "creating a #{ENV["ver"]} of #{ENV["model"]}"
   puts "Utter is " + $READY
-end
-
-task :server do
-
 end
 
 desc "Show a random savvy qoute"
 task :qoute do 
     puts "some smart qoute!"
 end
-
-

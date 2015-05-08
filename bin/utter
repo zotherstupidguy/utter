@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'rake'
 require 'find'
 require 'fileutils'
 require 'optparse'
-require 'rack'
-require 'utter'
+require 'rake'
+#require 'rack'
+#require 'utter'
 
 Dir.glob("utils/*.rb").each do |util|
   require_relative "./#{util}"
@@ -14,7 +14,7 @@ end
 
 global = OptionParser.new do |opts|
   opts.banner = ""
-  opts.separator UTTER_HELP 
+  #opts.separator UTTER_HELP 
 end
 global.order!
 @command = ARGV.shift
@@ -23,14 +23,15 @@ Dir.glob("commands/*.rb").each do |command|
   require "./#{command}"
 end
 
-# Loads the Rakefile
-app = Rake.application
-app.init
-app.load_rakefile
-
 # Captures the ARGV command
 case @command 
 when "new", "n" 
+  print "Creating a new UTTER API project"
+  # Loads the Rakefile
+  app = Rake.application
+  app.init
+  app.load_rakefile
+
   app['new'].invoke model = "Users", ver="v1"
 when "generate", "g"
   @model = ARGV[0] 

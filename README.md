@@ -69,3 +69,14 @@ http://www.faqs.org/docs/artu/ch01s06.html
 We would like to thank APIGee for their awesome webcasts that made building Utter a joy.
 
 [![RESTful API Design - Second Edition](http://img.youtube.com/vi/QpAhXa12xvU/0.jpg)](https://www.youtube.com/watch?v=QpAhXa12xvU)
+
+#General contribution help
+Fork it (https://github.com/zotherstupidguy/utter/fork)
+Clone it
+Run bundle
+Run rake (runs all tests and coverage report) or bundle exec guard
+Create your feature branch (git checkout -b my-new-feature)
+Write some tests, write some code, have some fun!
+Commit your changes (git commit -am 'Add some feature')
+Push to the branch (git push origin my-new-feature)
+Create a new pull request.
