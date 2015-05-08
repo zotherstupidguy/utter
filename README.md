@@ -8,6 +8,15 @@
 * > utter new services v1
 * > utter new services v2
 
+* > utter info services    # Shows info about all the services, including mounted versions, for how long, traffic usage, etc.
+* > utter info services v2 # Shows info about services v2 including for how long, traffic usage, etc.
+
+* > utter mount services      # Mount all services versions
+* > utter mount services v2   # Mount services v2 only 
+* > utter unmount services v2 # Unmount services v2 only 
+* > utter unmount services    # Unmount all services 
+
+
 # Utter's Tenets for Good Web API Design 
 - Use plural instead of singular (/dogs instead of /dog)
 - Enforce the use Versioning as v1, v2, v3, NOT v1.0.1 or v1.1 
