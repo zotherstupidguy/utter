@@ -56,9 +56,9 @@ module Utter
     $Utter.use Rack::Lock; # simultanious requests
 
 
-    def self.prefix v 
-      if !v.nil?
-	@prefix = v.to_s + '/'
+    def self.prefix p 
+      if !p.nil?
+	@prefix = p.to_s + '/'
       else
 	nil
       end
