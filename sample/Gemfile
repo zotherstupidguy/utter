@@ -1,0 +1,21 @@
+source 'https://rubygems.org'
+
+#gem 'utter' ,  :path => "~/repocode/utter/utter-1.0.0.alpha.gem"
+gem 'utter' ,  :path => "~/repocode/utter"
+gem 'rack'
+gem 'thin'
+#gem 'puma'
+gem 'redis'
+
+#'TODO place your private gem server here' if not given then local machine
+=begin
+source 'https://gems.example.com' do
+  # loading project_name API v1 
+  gem 'project_name\users'   ,  '~>1'
+  gem 'project_name\statues' ,  '~>1'
+
+  # loading project_name API v2
+  gem 'project_name\users'   ,  '~>2'
+  gem 'project_name\statues' ,  '~>2'
+end
+=end
