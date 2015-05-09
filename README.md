@@ -16,7 +16,7 @@
 * > utter mount services v2   # Mount services v2 only 
 * > utter unmount services v2 # Unmount services v2 only 
 * > utter unmount services    # Unmount all services 
-
+* > utter sample              # Add sample extensively-documented utter project into the current direcotry.
 
 # Utter's Tenets for Good Web API Design 
 - Use plural instead of singular (/dogs instead of /dog)
