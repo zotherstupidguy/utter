@@ -6,7 +6,8 @@
 * > utter new users v1         # creates ver1 api and model for users
 * > utter new users v2
 * > utter new services v1
-* > utter new services v2
+* > utter new services v2      # Copys the services previous vesions and alters the Version variable to match the current.
+* > utter new services v2 bare # Creates an Empty skeleton, so developer can write from scratch.
 
 * > utter info services    # Shows info about all the services, including mounted versions, for how long, traffic usage, etc.
 * > utter info services v2 # Shows info about services v2 including for how long, traffic usage, etc.
