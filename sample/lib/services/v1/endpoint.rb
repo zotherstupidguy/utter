@@ -1,4 +1,4 @@
-require 'utter'
+require_relative './../../../../lib/utter'
 require_relative './model'
 
 module Services 
@@ -18,8 +18,9 @@ module Services
 	Service.all.to_json
       end
 
+      # Usage:
+      # curl http://localhost:9393/hi?user=nono
       get '/hi' do 
-	#http://localhost:9393/hi?user=nono
 	{hello: params['user']}.to_json
       end
 
