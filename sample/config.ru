@@ -1,12 +1,13 @@
-#require './users/v1/endpoint' #TODO replace with #require 'project_name/users'    #gem
+#require './users/v1/endpoint' 
 #require './users/v2/endpoint'
 
-require './services/v1/endpoint'
-#require './statuses/v1/endpoint' #TODO replace with #require 'project_name/statuses' #gem
+require './lib/services/v1/endpoint'
+#require './statuses/v1/endpoint' 
 
 # lets configure our mongodb using mongoid gem
 #Mongoid.load!("./mongoid.yml")
 =begin
+
 require 'rack/cors'
 
 use Rack::Cors do
