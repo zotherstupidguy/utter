@@ -3,12 +3,11 @@ require_relative './model'
 
 module Services 
   module V1
-
    class Endpoint < Utter::Endpoint 
 
-      namespace :services
       prefix    :api
       version   :v1
+      namespace :services
 
       get '/ping' do 
 	"pong"
@@ -21,7 +20,11 @@ module Services
       # Usage:
       # curl http://localhost:9393/hi?user=nono
       get '/hi' do 
-	{hello: params['user']}.to_json
+	if params['user'].given?
+	  {hello: params['user']}.to_json
+	else 
+	  "hi there"
+	end
       end
 
       post '/new' do
