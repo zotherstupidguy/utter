@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-#gem 'utter' ,  :path => "~/repocode/utter/utter-1.0.0.alpha.gem"
-gem 'utter' ,  :path => "~/repocode/utter"
+gem 'utter' ,  :path => "./../"
 gem 'rack'
 gem 'thin'
 #gem 'puma'
