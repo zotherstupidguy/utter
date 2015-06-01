@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'utter' ,  :path => "./../"
 gem 'rack'
 gem 'thin'
-#gem 'puma'
+gem 'puma'
 gem 'redis'
 
 #'TODO place your private gem server here' if not given then local machine
