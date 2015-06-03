@@ -11,6 +11,7 @@ module Services
 
       get '/ping' do 
 	"pong"
+	#log.info "a ping gets a pong"
       end
 
       get '/' do 
@@ -27,6 +28,8 @@ module Services
 	end
       end
 
+      # Usage:
+      # curl http://localhost:9393/new?title="some title"
       post '/new' do
 	s = Service.new 
 	s.title = params['title']

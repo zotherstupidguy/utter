@@ -2,9 +2,14 @@ source 'https://rubygems.org'
 
 gem 'utter' ,  :path => "./../"
 gem 'rack'
+gem 'minitest'
 gem 'thin'
-gem 'puma'
+#gem 'puma'
+gem 'shotgun'
 gem 'redis'
+gem 'rake'
+#gem 'rack-test'
+#gem "rack-minitest", git: "git://github.com/brandonweiss/rack-minitest.git"
 
 #'TODO place your private gem server here' if not given then local machine
 =begin

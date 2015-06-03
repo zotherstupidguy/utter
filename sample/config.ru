@@ -4,12 +4,12 @@
 require './lib/services/v1/endpoint'
 #require './statuses/v1/endpoint' 
 
-# lets configure our mongodb using mongoid gem
+# Uncomment this if you want to use MongoDB
+# This configures our mongodb using mongoid gem
 #Mongoid.load!("./mongoid.yml")
+
 =begin
-
 require 'rack/cors'
-
 use Rack::Cors do
   allow do
     origins '*'
@@ -18,4 +18,5 @@ use Rack::Cors do
   end
 end
 =end
+
 run Utter::Endpoints
