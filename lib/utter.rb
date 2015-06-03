@@ -1,6 +1,9 @@
 require_relative './utter/logger'
 require_relative './utter/ds'
 require_relative './utter/api'
+require 'logger'
+log = Logger.new(STDOUT)
+
 =begin
 module Utter
   def self.gem_version
