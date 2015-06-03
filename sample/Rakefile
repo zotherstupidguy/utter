@@ -1,0 +1,82 @@
+# 
+# Rakefile is used to run tests and other common tasks that rake do.
+#
+
+require 'rake/testtask' 
+require 'logger'
+log = Logger.new(STDOUT)
+
+
+#task :default => :test_endpoints_specs
+task :default => :mytest
+
+task :start_server do
+  log.info "starting server...."
+  $server = spawn("bundle exec rackup") 
+end
+
+task :kill_server do
+  log.info "killing server...."
+  `kill #{$server}`
+end
+
+desc "tests the specs of all the endpoints"
+Rake::TestTask.new :test_endpoints_specs do |t| 
+  log.info "testing..."
+  t.pattern = "spec/*/v*/endpoint_spec.rb"
+  t.verbose = true
+end
+
+task :mytest do 
+  Rake::Task[:start_server].invoke
+  sleep 10 # wait for server
+  Rake::Task[:test_endpoints_specs].invoke
+  #sleep 10
+  Rake::Task[:kill_server].invoke
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+desc "tests the specs of all the models"
+Rake::TestTask.new :test_models_specs do |t| 
+  t.pattern = "spec/*_spec.rb"
+  t.verbose = true
+end
+
+desc "tests everything!"
+Rake::TestTask.new :test_all do |t| 
+  # depends on test_endpoints task and test_models tasks
+  #t.pattern = "spec/*_spec.rb"
+  #t.verbose = true
+end
+
+=begin
+# Packaging ------------------------------------------------------ 
+
+desc "Package the app into a gem" 
+task :package do 
+end
+
+# Releasing ------------------------------------------------------ 
+desc "Release to rubygems or your gemserver" 
+task :release => :package do 
+  require 'rake/gemcutter' 
+  Rake::Gemcutter::Tasks.new(spec).define 
+  Rake::Task['gem:push'].invoke 
+end
+
+# Deploying ------------------------------------------------------ 
+desc "Deploy to your production enviroment" 
+task :deploy=> :release do 
+end
+=end
