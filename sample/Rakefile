@@ -6,8 +6,6 @@ require 'rake/testtask'
 require 'logger'
 log = Logger.new(STDOUT)
 
-
-#task :default => :test_endpoints_specs
 task :default => :mytest
 
 task :start_server do
@@ -17,7 +15,7 @@ end
 
 task :kill_server do
   log.info "killing server...."
-  `kill #{$server}`
+  Process.kill("TERM", $server)
 end
 
 desc "tests the specs of all the endpoints"
@@ -34,18 +32,6 @@ task :mytest do
   #sleep 10
   Rake::Task[:kill_server].invoke
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
 desc "tests the specs of all the models"
 Rake::TestTask.new :test_models_specs do |t| 

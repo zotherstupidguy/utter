@@ -3,13 +3,12 @@ require_relative './../../helper'
 require_relative './../../../lib/services/v1/endpoint'
 
 describe 'Endpoint' do
+  
   before do
     def path url
       return `curl http://127.0.0.1:9292/api/v1/services#{url}`
     end
-    #$server = spawn("bundle exec rackup") 
   end
-
 
   describe "Services::V1::Endpoint" do
     it "hi" do
@@ -24,8 +23,6 @@ describe 'Endpoint' do
   end
 
   after do 
-    #sleep 60 
-    #`kill #{$server}`
   end
 
 end
