@@ -2,11 +2,6 @@
 #require './users/v2/endpoint'
 
 require './lib/services/v1/endpoint'
-#require './statuses/v1/endpoint' 
-
-# Uncomment this if you want to use MongoDB
-# This configures our mongodb using mongoid gem
-#Mongoid.load!("./mongoid.yml")
 
 =begin
 require 'rack/cors'
