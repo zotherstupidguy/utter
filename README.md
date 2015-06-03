@@ -1,4 +1,14 @@
 ![alt tag](utter.png)
+
+# Intro
+Utter is a simple ruby gem, that lets you focus on building your application API easily. 
+
+Utter is perfect for early stage startups where the focus of the logic of the application MUST not be drived towards complex UI stuff and the infinite loop of UI design taste, instead it lets you communicate the core of your idea into a solid API that can be tested extensivliy and offered later on privately or publicly to your endusers or UI developers, thats the spirit of Utter. 
+
+Moreover Utter is designed with some opinonated descions which makes perfect sense in the world of API development, making you relax and enjoy the ride of building a high-grade API, instead of learning and comparing all design descions of building an API, in other words its convention over configuration at its best for an web API.
+
+Utter belives that simplicity, is the path to joy and natural scalability, Utter espouses the benefits of small webservices madeup from small classes with small methods. Thus designing your system via Utter for a number of microwebservies should be easy, and Utter takes this argument very seriously, allowing you to package each endpoint of your api as a gem that can be deployed seperatly into another machine, offereing you the BEST control over managing your application for scalalblity.
+
 # Installation
   gem install utter
 #Usage
