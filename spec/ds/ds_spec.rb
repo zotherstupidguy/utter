@@ -1,24 +1,4 @@
-require './../helper'
-
-describe Utter::Model do
-  it "contains a instance #save method" do 
-  end
-  it "contains a class #find method" do 
-  end
-  it "contains a class #exists? method" do 
-  end
-end
-
-describe "User < Utter::Model" do
-  before do 
-  end
-  it "saves an object" do 
-  end
-  it "finds an object" do 
-  end
-  it "checks if object exists?" do 
-  end
-end
+require_relative './../helper'
 
 class User < Utter::Model
   #db('127.0.0.1', '3434')
@@ -26,38 +6,70 @@ class User < Utter::Model
   index :username 
 end
 
-class Idea < Utter::Model
-  #db('127.0.0.1', '3434')
-  attr_accessor :title, :url
-  index :title 
+
+describe Utter::Model do
+  it "contains a instance #save method" do 
+    skip
+  end
+  it "contains a class #find method" do 
+    skip
+  end
+  it "contains a class #exists? method" do 
+    skip
+  end
 end
 
-user = User.new
-user.username = "kkiko"
-user.password = "downhilligo"
-user.save
-p User.all
+describe "User < Utter::Model" do
 
-#user.range # takes first_index, last_index 
-#p user.id
-#p user.index 50 
+  describe "saving" do 
+    before do 
+      #system("sudo service redis-server restart")
+      system("redis-cli flushall")
+    end
+    it "saves an objects" do 
+      user = User.new
+      user.username = "usera"
+      user.password = "passwordusera"
+      user.save
 
-user = User.new
-user.username = "fouad"
-user.save
-current_user = User.find "fouad"
-p current_user.username
-#p User.all
-#idea = Idea.new
-#p "Idea id is"
-##p idea.id
-#p User.all
+      user = User.new
+      user.username = "userb"
+      user.password = "passworduserb"
+      user.save
 
-#i = Idea.new
-#i.title = "phd"
-#i.id = "phd"
-#i.save
+      User.all.must_equal ["userb", "usera"]
+    end
+  end
 
-#p Idea.all
-#myi = Idea.find "phd"
-#p Idea.exists? "pshd"
+  describe "finding" do 
+    before do 
+      system("redis-cli flushall")
+      user = User.new
+      user.username = "userx"
+      user.password = "passworduserx"
+      user.save
+    end
+    it "finds an object and updates it" do 
+      current_user = User.find "userx"
+      current_user.password = "updatedpass"
+      current_user.save
+
+      User.find("userx").password.must_equal "updatedpass"
+    end
+  end
+
+  describe "existance" do 
+    before do 
+      system("redis-cli flushall")
+      user = User.new
+      user.username = "usera"
+      user.password = "passworduserx"
+      user.save
+    end
+    it "checks if object exists?" do 
+      User.exists?("usera").must_equal true
+      User.exists?("userG").must_equal false 
+    end
+  end
+
+end
