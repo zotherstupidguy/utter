@@ -18,7 +18,7 @@ require 'rake/testtask'
 
 task :run_sample do 
   # generate a sample app 
-  # `cp /utter_sample .`
+  `cp sample utter_sample`
 end
 
 Rake::TestTask.new :api => [:run_sample] do |t|
@@ -41,32 +41,68 @@ task :my_task, [:arg1, :arg2] do |t, args|
 end
 
 task :project_folder, [:project_title] do |t, args|
+
   p "creating " + args[:project_title]
   FileUtils.mkdir_p "#{args[:project_title]}/lib/users/v1"
   FileUtils.mkdir_p "#{args[:project_title]}/spec/users/v1"
 
+
+  # Creates a Users model 
+  open("#{args[:project_title]}/lib/users/v1/model.rb", 'a') { |f|
+    print "Creating #{args[:project_title]}\'s Users model \n"
+    f.puts ""
+  }
+
+  # Creates a Users endpoint 
+  open("#{args[:project_title]}/lib/users/v1/endpoint.rb", 'a') { |f|
+    print "Creating #{args[:project_title]}\'s Users endpoint \n"
+    f.puts ""
+  }
+
+
+  # Creates a Users model spec 
+  open("#{args[:project_title]}/spec/users/v1/model_spec.rb", 'a') { |f|
+    print "Creating #{args[:project_title]}\'s Users model spec\n"
+    f.puts ""
+  }
+
+  # Creates a Users endpoint spec 
+  open("#{args[:project_title]}/spec/users/v1/endpoint_spec.rb", 'a') { |f|
+    print "Creating #{args[:project_title]}\'s Users endpoint spec\n"
+    f.puts ""
+  }
+
+
+
   # Creates a config.ru
   open("#{args[:project_title]}/config.ru", 'a') { |f|
     print "Creating #{args[:project_title]}\'s config.ru\n"
-    f.puts "def hello."
-    f.puts " Hello, world."
-    f.puts "end"
+    f.puts "require './lib/users/v1/endpoint'"
+    f.puts "run Utter::Endpoints"
   }
 
   # Creates a Gemfile 
   open("#{args[:project_title]}/Gemfile", 'a') { |f|
     print "Creating #{args[:project_title]}\'s Gemfile \n"
-    f.puts "def hello."
-    f.puts " Hello, world."
-    f.puts "end"
+
+    f.puts "source 'https://rubygems.org'"
+    f.puts " "
+    f.puts "gem 'utter'" 
+    f.puts "gem 'rack'"
+    f.puts "gem 'minitest'"
+    f.puts "gem 'thin'"
+    f.puts "#gem 'puma'"
+    f.puts "gem 'shotgun'"
+    f.puts "gem 'redis'"
+    f.puts "gem 'rake'"
   }
 
   # Creates a README.md 
   open("#{args[:project_title]}/README.md", 'a') { |f|
     print "Creating #{args[:project_title]}\'s README.md \n"
-    f.puts "def hello."
-    f.puts " Hello, world."
-    f.puts "end"
+    f.puts "Introduction"
+    f.puts "============"
+    f.puts "This is an Utter API"
   }
 
 end
@@ -84,7 +120,7 @@ end
 
 desc "Creates a new Utter endpoint"
 task :endpoint do
-  puts "creating endpoint.rb" + $DONE
+  puts "creating endpoint.rb" + $DONE.to_s
 end
 
 # > utter new #projectname  
@@ -115,15 +151,15 @@ end
 #task :my_task, [:arg1, :arg2] do |t, args|
 #  puts "Args were: #{args}"
 
+# Usage rake "new["my_project"]"
 desc "Creates a new Utter Project"
 task :new, [:project_title] do |t, args| 
   Rake::Task[:project_folder].invoke(args[:project_title])
-  #Rake::Task[:endpoint].invoke(args[:project_title])
   Rake::Task[:model].invoke(args[:project_title])
+  Rake::Task[:endpoint].invoke(args[:project_title])
 
-  #puts "creating a #{ENV["ver"]} of #{ENV["model"]}"
-  #
-  #puts "Utter is " + $READY
+  puts "Your #{args[:project_title]} is " + $READY.to_s
+  Rake::Task[:qoute].invoke
 end
 
 
