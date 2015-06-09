@@ -1,6 +1,9 @@
 # No code is faster than no code.
-#What makes Redis different from other key-value stores is that it provides other operations similar to INCR that can be used to model complex problems. This is why you can use Redis to write whole web applications without using another database like an SQL database, and without going crazy.
-# Redis values can be more than strings. Redis supports Lists, Sets, Hashes, Sorted Sets, Bitmaps, and HyperLogLog types as values, and there are atomic operations to operate on them so we are safe even with multiple accesses to the same key. 
+#
+# What makes Redis different from other key-value stores is that it provides other operations similar to INCR that can be used to model complex problems. 
+# This is why you can use Redis to write whole web applications without using another database like an SQL database, and without going crazy.
+# Redis values can be more than strings.Redis supports Lists, Sets, Hashes, Sorted Sets, Bitmaps, and HyperLogLog types as values, 
+# and there are atomic operations to operate on them so we are safe even with multiple accesses to the same key. 
 
 
 # lpush users someusername # now i have a list of all users registered
@@ -29,7 +32,9 @@ module Utter
 	self.class.store.lpush model, @id # now i have a list of all users registered
 	self.class.store.set "#{model + ":" + @id}", Marshal::dump(self)
       else 
-	Utter::Klass.log.info "#{id} already exists"
+	Utter::Klass.log.info "#{id} already exists, updating"
+	model = (self.class.to_s.downcase + 's') 
+	self.class.store.set "#{model + ":" + @id}", Marshal::dump(self)
       end
     end
 
