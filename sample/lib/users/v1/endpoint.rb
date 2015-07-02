@@ -27,11 +27,26 @@ module Users
     #Typically, web services package endpoint descriptions and use a WSDL file to share these descriptions with clients.
     #Clients use the web service endpoint description to generate code that can send SOAP messages to and receive SOAP messages from the web service endpoint.
 
-    class API < Utter::API
+    class Endpoint < Utter::Endpoint 
 
       prefix    :api
       version   :v1
       namespace :users
+
+      # Authentication 
+      opaque = "U773r_31337@ppz!"
+      users = {'user1' => 'password1', 'user2' => 'password2'}
+      $Utter.use Rack::Auth::Digest::MD5, "Authentication required", opaque do |username|
+	users[username]
+	#User.find(username)
+      end
+
+      $Utter.use Rack::Session::Cookie, :key => 'rack.session',
+	:domain => 'foo.com',
+	:path => '/',
+	:expire_after => 2592000, # In seconds
+	:secret => 'change_me'
+      # End of Authentication 
 
       get '/' do 
 	User.all.to_json
@@ -45,7 +60,7 @@ module Users
       get '/profile' do
 	auth params[:username], params[:password]
 	current_user.to_json
-	(status 'unav').to_json
+	#(status 'unav').to_json
       end
 
       post '/login' do

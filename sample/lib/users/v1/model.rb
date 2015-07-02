@@ -1,9 +1,61 @@
-# require 'utter/redis' 
-# this require manipulates the Utter::Model class metaprogramatically so it is ready for the app to use just by requiring. 
+# 
+# Utter uses redis
+#
 
-# MongoDB Utter Extension, packaged as a gem
-require 'mongoid'
+module Users 
+  module V1
 
+    class User < Utter::Model
+      #db('127.0.0.1', '3434')
+      attr_accessor :username, :password
+      index :username 
+      
+      def initialize username, password
+	@user = nil
+	@username = username 
+	@password = password
+      end
+
+      def auth username, password
+	#if Users::V1::User.where(username: username).exists?
+	if exists? username
+	  user = find(username)
+	  if user.password ==  password
+	    @user = user
+	    'success: return user session token to the client app which expires in 24hours'
+	  else
+	    @user = nil
+	    'check password'
+	  end
+	else 
+	  @user = nil
+	  'failure!'
+	end
+      end
+
+      def signup username, password
+	u = Users::V1::User.new params[:username], params[:password]
+	#u.username  = params[:username] 
+	#u.password  = params[:password]
+
+	if !Users::V1::User.where(username: params[:username]).exists?
+	  u.save!
+	  @user = find(username)
+	  'success!'
+	else 
+	  'failure!'
+	end
+      end
+
+      def current_user
+	@user
+	# or self
+      end
+
+    end
+  end
+end
+=begin
 module Utter
 
   class Model
@@ -36,17 +88,17 @@ module Utter
     end
 
     def signup username, password
-	u = Users::V1::User.new
-	u.username     = params[:username] 
-	u.password = params[:password]
+      u = Users::V1::User.new
+      u.username     = params[:username] 
+      u.password = params[:password]
 
-	if !Users::V1::User.where(username: params[:username]).exists?
-	  u.save!
-	  @user = Utter::Mongo::User.find_by(username: username)
-	  'success!'
-	else 
-	  'failure!'
-	end
+      if !Users::V1::User.where(username: params[:username]).exists?
+	u.save!
+	@user = Utter::Mongo::User.find_by(username: username)
+	'success!'
+      else 
+	'failure!'
+      end
     end
 
     def current_user
@@ -67,9 +119,10 @@ end
 module Users 
 
   module V1
-    
+
     class User < Utter::Mongo::User
     end
 
   end
 end
+=end

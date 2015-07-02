@@ -1,4 +1,4 @@
-require 'mongoid'
+#require 'mongoid'
 # require 'utter/redis' 
 # this require manipulates the Utter::Model class metaprogramatically so it is ready for the app to use just by requiring. 
 

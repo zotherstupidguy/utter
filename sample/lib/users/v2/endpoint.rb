@@ -8,6 +8,12 @@ require_relative './model'
 #  'secret'
 #end
 
+
+#$Utter.use Rack::Auth::Digest::MD5, "Hello, World", opaque do |username|
+#  User.find(username).password 
+#end
+
+
 #require 'rack/ssl'
 #
 #$Utter.use Rack::SSL

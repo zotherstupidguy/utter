@@ -1,7 +1,14 @@
 #require './users/v1/endpoint' 
 #require './users/v2/endpoint'
 
-require './lib/services/v1/endpoint'
+#require_relative './lib/services/v1/endpoint' # doesn't require authentication 
+
+require_relative './lib/users/v1/endpoint' # Users Endpoint must come first as it is the one that controls the authentication code.
+# $Utter.use rack md5 digest middleware for authentication, once loaded it forces all endpoints to be authenticated, so anything loaded after it should require autehnciation and anything before it will not requrie authentication.
+#
+#
+require_relative './lib/services/v1/endpoint' # require authentication 
+
 
 =begin
 require 'rack/cors'
