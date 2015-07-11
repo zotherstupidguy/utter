@@ -2,9 +2,22 @@
 
 # Intro
 
+Utter is an API framework for creative nomad enterpenurs, who wants to create minimual valiuable products in the shortest amount of time to test the market.
+https://www.techinasia.com/12-startups-in-12-months-how-this-digital-nomad-doing-it/
+
+
+Many startups are have mobile-only apps, to which they require a solid API t deliver their services, Utter is perfect for this scenario, leaving your UI developers at ease.
+
+Creative people tend to polish their products but never really finish them, similar to ART! however its always better to actually finish a minimual product for others to test and play with than to keep it on a github dusty github repo waiting for a mircale of motiviation to happen, while you are busy on your next idea! Thats where Utter comes in. Utter lets you from the start focus on the API of your project, and rapidly develop it to enable you to either work or even outsource the UI job, if you like what you have done.
+
+Utter keeps every project as simple as possible.
+
+"Once launched, Levels blasts out several emails to big tech blogs, submits the product to Hacker News, Reddit, and Product Hunt, and then heads to bed. “I have a big sleep, wake up, and hopefully see a lot of emails and tweets about my new project,” he says. Thus far, he has had plenty of emails and tweets to occupy his post-launch waking moments." Utter bin contains a "shoutout" command that lets the world know of your project.
+
 Utter is a ruby web API framework designed for performance speed, it applies a microservices philosphy with convention-over-configuration backed by redis to help build powerful API services with ease.
 
 Utter's codebase is so tiny you can read on one sitting.
+
 
 Utter is perfect for early stage startups (and big players) where there is a need to focus on the logic of the application, instead of complex UI stuff and the infinite loop of UI design taste. Utter lets you communicate the core of your idea into a solid API that can be tested extensivliy and offered lateron privately or publicly to your endusers or UI developers, thats the spirit of Utter. 
 

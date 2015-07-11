@@ -1,16 +1,11 @@
 # No code is faster than no code.
-require 'rack' 
+
 require 'json' 
 
+require_relative './builder'
+
+
 module Utter
-
-  class Builder < Rack::Builder
-
-  end
-
-  def self.helpers *ext
-    Utter::Builder.send :include, *ext if ext.any?
-  end
 
   class Endpoint 
 
@@ -36,13 +31,25 @@ module Utter
 	  $Utter.map(full) do
 	    puts "Ready: #{full}"
 	    run lambda { |env| [200, {"Content-Type" => "application/json"}, [$Utter.instance_exec(&block)]] }
-
 	  end
-	end
 
+	end
       end
 
     end
+
+    def redirect path
+      full = '/' + @prefix.to_s + @version.to_s + @namespace.to_s + path
+      res = Rack::Response.new
+      res.redirect(full)
+      res.finish
+
+      #$Utter.map(full) do
+      #	puts "Redirect: #{full}"
+      #	run lambda { |env| [200, {"Content-Type" => "application/json"}, [$Utter.instance_exec(&block)]] }
+      #end
+    end
+
 
     before do |e|
       request=Rack::Request.new e;
@@ -54,7 +61,9 @@ module Utter
     $Utter.use Rack::CommonLogger  
     $Utter.use Rack::Session::Cookie; # https://gist.github.com/noahhendrix/1509698 Authenticating with Grape
     $Utter.use Rack::Lock; # simultanious requests
-
+    #
+    #TODO add Rack::Warden here
+    #
 
     def self.prefix p 
       if !p.nil?
