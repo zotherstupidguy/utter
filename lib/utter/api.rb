@@ -38,7 +38,9 @@ module Utter
 
     end
 
-    def redirect path
+    #TODO make redirect have path and args
+    # def redirect path, args
+    def redirect path 
       full = '/' + @prefix.to_s + @version.to_s + @namespace.to_s + path
       res = Rack::Response.new
       res.redirect(full)
@@ -52,7 +54,7 @@ module Utter
 
 
     before do |e|
-      request=Rack::Request.new e;
+      request = Rack::Request.new e;
       request.params.dup.map do |k,v|
 	params[k.to_sym]=v
       end
