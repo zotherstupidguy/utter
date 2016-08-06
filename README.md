@@ -1,6 +1,8 @@
 ![alt tag](utter.png)
 
 # Intro
+Utter aims to solve problems in this.
+http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html
 
 Utter is an API framework for creative nomad enterpenurs, who wants to create minimual valiuable products in the shortest amount of time to test the market.
 https://www.techinasia.com/12-startups-in-12-months-how-this-digital-nomad-doing-it/
